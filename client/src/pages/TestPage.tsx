@@ -14,11 +14,13 @@ export default function TestPage(){
     const [row, setRow] = useState<RowData | null>(null); // Store the whole row
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [num, setNum] = useState<number>(1);
 
     useEffect(() => {
+        
         const fetchRow = async () => {
           try {
-            const response = await axios.get<RowData>(`http://localhost:8080/api/row/${1}`);
+            const response = await axios.get<RowData>(`http://localhost:8080/api/row/${num}`);
             setRow(response.data); // Store the entire row in state
           } catch (err: unknown) {
             console.error('Error fetching row:', err);
@@ -34,12 +36,16 @@ export default function TestPage(){
         };
     
         fetchRow();
-      }, []);
+      }, [num]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
-
+    const handleClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+        const prevCount = num;
+        setNum(prevCount+1);
+      };
+    
     
     return(
         <div className='flex flex-col items-center justify-center'>
@@ -56,14 +62,16 @@ export default function TestPage(){
         <p><strong>ID:</strong> {row.id}</p>
         <p><strong>Name:</strong> {row.name}</p>
         <p><strong>Price:</strong> {row.price}</p>
-
+        <p><img src={`/items/image${num}.png`}/></p>
         {/* Access the entire row if needed */}
         <pre>{JSON.stringify(row, null, 2)}</pre>
+        
         </div>
         ) : (
         <p>No data found</p>
         )}
         </div>
+        <button onClick={handleClick}>HELLO</button>
         </div> 
     );
 }
