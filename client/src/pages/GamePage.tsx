@@ -46,12 +46,12 @@ export default function GamePage(){
     }
 
     
-
+    const id = useAppSelector((state)=> state.item)
 
     return(
         <div className="flex-col items-center justify-center ">
             
-            <img src={scythe} alt="fortnite" className="z-10 w-64 h-auto mx-auto mb-10 border-4 border-black rounded-lg" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
+            <img src={`/items/image${id.id}.png`} alt="fortnite" className="z-10 w-64 h-auto mx-auto mb-10 border-4 border-black rounded-lg" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
             <InfoBox hovering={isHovering} />
             {/* <div className={`${isHovering? "":"hidden"}`}>text text text</div> */}
             <InputBar onSubmit={handleSubmit} onChange={handleChange} value={inputvalue}/>

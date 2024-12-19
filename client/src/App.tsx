@@ -3,6 +3,8 @@ import Root from "./pages/Root";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import TestPage from "./pages/TestPage";
+import TestPageTwo from "./pages/TestPageTwo";
+
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/test",
         element: <TestPage />
+      },
+      {
+        path: "testtwo",
+        element: <TestPageTwo/>
       }
     ]
   }

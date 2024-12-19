@@ -1,12 +1,10 @@
 import '../index.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import type RowData from '../types/types';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { setItem } from '../store';
 
-interface RowData {
-    id: number;
-    name: string;
-    price: number;
-}
 
 export default function TestPage(){
 
@@ -15,13 +13,16 @@ export default function TestPage(){
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [num, setNum] = useState<number>(1);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         
         const fetchRow = async () => {
           try {
             const response = await axios.get<RowData>(`http://localhost:8080/api/row/${num}`);
+            
             setRow(response.data); // Store the entire row in state
+            dispatch(setItem(response.data));
           } catch (err: unknown) {
             console.error('Error fetching row:', err);
             if(err instanceof Error){
@@ -37,10 +38,14 @@ export default function TestPage(){
     
         fetchRow();
       }, [num]);
-
+    
+    const item = useAppSelector((state) => state.item);
+    
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
-
+    
+    
+    
     const handleClick: React.MouseEventHandler<HTMLButtonElement> = () => {
         const prevCount = num;
         setNum(prevCount+1);
@@ -64,8 +69,10 @@ export default function TestPage(){
         <p><strong>Price:</strong> {row.price}</p>
         <p><img src={`/items/image${num}.png`}/></p>
         {/* Access the entire row if needed */}
-        <pre>{JSON.stringify(row, null, 2)}</pre>
-        
+        {/* <pre>{JSON.stringify(row, null, 2)}</pre> */}
+        <p><strong>ID:</strong> {item.id}</p>
+        <p><strong>Name:</strong> {item.name}</p>
+        <p><strong>Price:</strong> {item.price}</p>
         </div>
         ) : (
         <p>No data found</p>
