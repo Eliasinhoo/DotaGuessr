@@ -1,7 +1,7 @@
 
 
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import scythe from "../assets/Scythe_of_Vyse_itemicon_dota2_gameasset.png";
+
 import GuessBar from "../components/GuessBar";
 import { setGuess, incrementGuess } from "../store";
 import {FormEvent } from 'react';
@@ -45,13 +45,13 @@ export default function GamePage(){
         setIsHovering(false);
     }
 
+    const id = useAppSelector((state) => state.item.id)
     
-
 
     return(
         <div className="flex-col items-center justify-center ">
             
-            <img src={scythe} alt="fortnite" className="z-10 w-64 h-auto mx-auto mb-10 border-4 border-black rounded-lg" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
+            <img src={`/items/image${id}.png`} alt="fortnite" className="z-10 w-64 h-auto mx-auto mb-10 border-4 border-black rounded-lg" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>
             <InfoBox hovering={isHovering} />
             {/* <div className={`${isHovering? "":"hidden"}`}>text text text</div> */}
             <InputBar onSubmit={handleSubmit} onChange={handleChange} value={inputvalue}/>

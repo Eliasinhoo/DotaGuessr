@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { guessReducer, setGuess, guessType, incrementGuess, resetGame} from './slices/GuessSlice';
-
+import { guessReducer, setGuess, guessType, incrementGuess, resetGame, setPrice} from './slices/GuessSlice';
+import { setItem, clearItem, itemReducer } from './slices/ItemSlice';
 
 
 export const store = configureStore({
   reducer: {
-    guess: guessReducer
+    guess: guessReducer,
+    item: itemReducer
     
   },
 });
@@ -13,8 +14,9 @@ export const store = configureStore({
 
 //export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 
-export { setGuess, incrementGuess, resetGame};
+export { setGuess, incrementGuess, resetGame, setPrice};
 export type {guessType};
+export {setItem, clearItem};
 
 // Infer the `RootState`,  `AppDispatch`, and `AppStore` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

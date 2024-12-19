@@ -11,7 +11,7 @@ interface guessType {
     guessValue: number | null;
     guessNumber: number;
     guessList: listobject[];
-    answer: number;
+    answer: number | null;
     win: boolean | null;
     
 }
@@ -43,7 +43,7 @@ const initialState: guessType = {
             correct: null
         },
     ],
-    answer: 5200,
+    answer: null,
     win: null,
 }
 
@@ -91,11 +91,14 @@ const guessSlice = createSlice({
             state.guessNumber = initialState.guessNumber;
             state.win = initialState.win;
             //more in future
+        },
+        setPrice: (state, action: PayloadAction<number | null>) => {
+            state.answer = action.payload;
         }
         
     }
 });
 
-export const { setGuess, incrementGuess, resetGame } = guessSlice.actions;
+export const { setGuess, incrementGuess, resetGame, setPrice } = guessSlice.actions;
 export const guessReducer = guessSlice.reducer;
 export type {guessType}
