@@ -13,7 +13,7 @@ interface guessType {
     guessList: listobject[];
     answer: number | null;
     win: boolean | null;
-    
+    reload: number;
 }
 
 
@@ -45,6 +45,7 @@ const initialState: guessType = {
     ],
     answer: null,
     win: null,
+    reload: 1,
 }
 
 
@@ -94,11 +95,14 @@ const guessSlice = createSlice({
         },
         setPrice: (state, action: PayloadAction<number | null>) => {
             state.answer = action.payload;
+        },
+        setReload: (state) => {
+            state.reload = state.reload+1;
         }
         
     }
 });
 
-export const { setGuess, incrementGuess, resetGame, setPrice } = guessSlice.actions;
+export const { setGuess, incrementGuess, resetGame, setPrice, setReload } = guessSlice.actions;
 export const guessReducer = guessSlice.reducer;
 export type {guessType}

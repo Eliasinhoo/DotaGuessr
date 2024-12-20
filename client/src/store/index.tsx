@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { guessReducer, setGuess, guessType, incrementGuess, resetGame, setPrice} from './slices/GuessSlice';
+import { guessReducer, setGuess, guessType, incrementGuess, resetGame, setPrice, setReload} from './slices/GuessSlice';
 import { setItem, clearItem, itemReducer } from './slices/ItemSlice';
 
 
@@ -14,7 +14,7 @@ export const store = configureStore({
 
 //export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 
-export { setGuess, incrementGuess, resetGame, setPrice};
+export { setGuess, incrementGuess, resetGame, setPrice, setReload};
 export type {guessType};
 export {setItem, clearItem};
 
