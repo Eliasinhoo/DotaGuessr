@@ -11,7 +11,7 @@ export default function Header(){
     
     const dispatch = useAppDispatch();
     const reset = useAppSelector((state) => state.guess.reload);
-    const num = Math.floor(Math.random() * (26 - 1 + 1)) + 1;
+    const num = Math.floor(Math.random() * (181 - 1 + 1)) + 1;
     
     useEffect(() => {
         
